@@ -1,0 +1,415 @@
+{% extends 'base_generic.html' %}
+{% load static %}
+{% block body %}
+    <!-- BANNER START -->
+    <section>
+        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://pbs.twimg.com/media/EGHYvttU4AAYKb7?format=jpg&name=large" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://pbs.twimg.com/media/EGHYvtkUcAAuc8T?format=jpg&name=large" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://pbs.twimg.com/media/EGHYvtjU0AAO8w1?format=jpg&name=large" class="d-block w-100" alt="...">
+                </div>
+                <!--https://upload.wikimedia.org/wikipedia/commons/8/8d/Yarra_Night_Panorama%2C_Melbourne_-_Feb_2005.jpg-->
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </section>
+    <section class="search-sec">
+        <div class="container">
+            <form action="#" method="post" novalidate="novalidate">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                                <input type="text" class="form-control search-slt" placeholder="Enter Pickup City">
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                                <input type="text" class="form-control search-slt" placeholder="Enter Drop City">
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                                <select class="form-control search-slt" id="exampleFormControlSelect1">
+                                    <option>Select Vehicle</option>
+                                    <option>Example one</option>
+                                    <option>Example one</option>
+                                    <option>Example one</option>
+                                    <option>Example one</option>
+                                    <option>Example one</option>
+                                    <option>Example one</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                                <button type="button" class="btn btn-danger wrn-btn">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+    <!-- BANNER END -->
+    <main>
+        <div class="container">
+            <!-- POPULAR EVENT START -->
+            <section class="popular-event mb-4">
+                <h3 class="text-uppercase text-center pb-4">Popular Events In Kolkata</h3>
+                <div class="event-loop-content ">
+                    <div class="row">
+                        
+                        <div class="col-sm-4">
+                            <div class="card mb-4" >
+                                
+                                <a href="#">
+                                    <img class="card-img-top" src="{% static 'images/yoga.jpg' %}" alt="Card image cap">
+                                    <div class="card-body">
+                                        <div class="event-meta">
+                                            <div class="media-left pr-2">
+                                                <i class="icofont-calendar"></i>
+                                                <span class="up-month text-danger">May</span>
+                                                <span class="up-day">29-31</span>
+                                            </div>
+                                            <div class="media-right pl-2">
+                                                <h6>Medical Expo Kolkata 2020</h6>
+                                                <p class="mb-0"><span class="event-venu"><i class="icofont-location-pin"></i> Biswa Bangla Convention Centre</span></p>
+                                                <p class="mb-0">
+                                                    <span class="tick-price">
+                                                        <i class="icofont-ticket"></i> Free
+                                                    </span>
+                                                </p>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="card mb-4" >
+                                
+                                <a href="#">
+                                    <img class="card-img-top" src="{% static 'images/yoga.jpg' %}" alt="Card image cap">
+                                    <div class="card-body">
+                                        <div class="event-meta">
+                                            <div class="media-left pr-2">
+                                                <i class="icofont-calendar"></i>
+                                                <span class="up-month text-danger">May</span>
+                                                <span class="up-day">29-31</span>
+                                            </div>
+                                            <div class="media-right pl-2">
+                                                <h6>Medical Expo Kolkata 2020</h6>
+                                                <p class="mb-0"><span class="event-venu"><i class="icofont-location-pin"></i> Biswa Bangla Convention Centre</span></p>
+                                                <p class="mb-0">
+                                                    <span class="tick-price">
+                                                        <i class="icofont-ticket"></i> Free
+                                                    </span>
+                                                </p>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="card mb-4" >
+                                
+                                <a href="#">
+                                    <img class="card-img-top" src="{% static 'images/yoga.jpg' %}" alt="Card image cap">
+                                    <div class="card-body">
+                                        <div class="event-meta">
+                                            <div class="media-left pr-2">
+                                                <i class="icofont-calendar"></i>
+                                                <span class="up-month text-danger">May</span>
+                                                <span class="up-day">29-31</span>
+                                            </div>
+                                            <div class="media-right pl-2">
+                                                <h6>Medical Expo Kolkata 2020</h6>
+                                                <p class="mb-0"><span class="event-venu"><i class="icofont-location-pin"></i> Biswa Bangla Convention Centre</span></p>
+                                                <p class="mb-0">
+                                                    <span class="tick-price">
+                                                        <i class="icofont-ticket"></i> Free
+                                                    </span>
+                                                </p>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- POPULAR EVENT END -->
+            <!-- HEALTH AND WELLNESS EVENT START -->
+            <section class="flex-event mb-4 py-5">
+                <h3 class="text-uppercase text-center pb-4">Health Wellness Events In Kolkata</h3>
+                <div class="event-loop-content ">
+                    <div class="row">
+                        
+                        <div class="col-md-6 col-sm-6">
+                            <div class="card border-primary flex-md-row mb-4 shadow-sm h-md-250">
+                                <div class="card-body d-flex flex-column align-items-start">
+                                    <strong class="d-inline-block mb-2 text-primary">World</strong>
+                                    <h6 class="mb-0">
+                                    <a class="text-dark" href="#">40 Percent of People Can’t Afford Basics</a>
+                                    </h6>
+                                    <div class="mb-1 text-muted small"><i class="icofont-calendar"></i> Nov 12</div>
+                                    <p class="card-text mb-0"><i class="icofont-location-pin"></i>  Biswa Bangla Convention Centre</p>
+                                    <p class="mb-auto">
+                                                    <span class="tick-price">
+                                                        <i class="icofont-ticket"></i> Free
+                                                    </span>
+                                                </p>
+                                    <a class="btn btn-outline-primary btn-sm" role="button" href="http://www.jquery2dotnet.com/">Continue reading</a>
+                                </div>
+                                <img class="card-img-right flex-auto d-none d-lg-block" alt="Thumbnail [200x250]" src="{% static 'images/yoga.jpg' %}" style="width: 200px; height: 250px;">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6">
+                            <div class="card border-primary flex-md-row mb-4 shadow-sm h-md-250">
+                                <div class="card-body d-flex flex-column align-items-start">
+                                    <strong class="d-inline-block mb-2 text-primary">World</strong>
+                                    <h6 class="mb-0">
+                                    <a class="text-dark" href="#">40 Percent of People Can’t Afford Basics</a>
+                                    </h6>
+                                    <div class="mb-1 text-muted small">Nov 12</div>
+                                    <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
+                                    <a class="btn btn-outline-primary btn-sm" role="button" href="http://www.jquery2dotnet.com/">Continue reading</a>
+                                </div>
+                                <img class="card-img-right flex-auto d-none d-lg-block" alt="Thumbnail [200x250]" src="{% static 'images/yoga.jpg' %}" style="width: 200px; height: 250px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END HEALTH AND WELLNESS EVENT START -->
+            <!-- START ONLINE BANNER SECTION -->
+            <section class="online-banner mb-4 py-5">
+                <h3 class="text-uppercase text-center pb-4">Explore Yourself with online</h3>
+                <div class="my-4">
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-6">
+                            <div class="online-banner-left">
+                                <div class="inner-banner-left">
+                                    <div class="bn-ovrlay">
+                                        <h4 class="text-primary text-capitalize font-weight-bold">Connect Through</h4>
+                                        <h2 class="text-uppercase font-weight-bold mb-4">Online Event</h2>
+                                        <a class="btn btn-primary text-white" href="#">Browse Event <i class="icofont-long-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xs-6">
+                            <div class="online-banner-right">
+                                <img src="{% static 'images/yoga2.jpg' %}" width="100%">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END ONLINE BANNER SECTION -->
+            <!-- START EVENT CATEGORY SECTION -->
+            <section class="event-category mb-4 py-5">
+                <h3 class="text-uppercase text-center pb-4">Browse event by category</h3>
+                <div class="my-4">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6">
+                            <div class="box1">
+                                <img src="{% static 'images/epm_planning.png' %}" alt="">
+                                <h3 class="title">Buisness</h3>
+                                <ul class="icon">
+                                    <li><a href="#">View <i class="icofont-long-arrow-right"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="box1">
+                                <img src="{% static 'images/parties.jpg' %}" alt="" class="img-thumbn">
+                                <h3 class="title">Parties</h3>
+                                <ul class="icon">
+                                    <li><a href="#">View <i class="icofont-long-arrow-right"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="box1">
+                                <img src="{% static 'images/food.jpg' %}" alt="">
+                                <h3 class="title">Food and Drinks</h3>
+                                <ul class="icon">
+                                    <li><a href="#">View <i class="icofont-long-arrow-right"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END EVENT CATEGORY SECTION -->
+            <!-- START CREATE ACCOUNT BANNER SECTION -->
+            <section class="create-acc-banner mb-4 py-5">
+                <div class="my-4">
+                    <div class="row">
+                        <div class="create-acc-inner">
+                            <div class="acc-content text-center text-white">
+                                <h2 class="text-uppercase font-weight-bold text-white cavet">Get your event noticed</h2>
+                                <p class="text-light-white mb-5 ">Million of people are searching for events just like yours. Be there for them. Join the largest event community outside of socia networking and tickiting websites to start getting more visibility now</p>
+                                <a href="javascript:void(0);" class="text-white text-capitalize">List Event For Free</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END CREATE ACCOUNT BANNER SECTION -->
+            <!-- START COUNTRY BASED EVENT -->
+            <section class="country-category mb-4 py-5">
+                <h3 class="text-uppercase text-center pb-4">Explore Events across the World</h3>
+                <div class="my-4">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="country-bg" style="background-image: url('{% static 'images/background.jpg' %}');">
+                                <a href="#">
+                                    <div class="country-overlay">
+                                        <p class="text-white font-weight-bold cavet">Newyork Event</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="country-bg" style="background-image: url('{% static 'images/background.jpg' %}');">
+                                <a href="#">
+                                    <div class="country-overlay">
+                                        <p class="text-white font-weight-bold cavet">Toronto Event</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="country-bg" style="background-image: url('{% static 'images/background.jpg' %}');">
+                                <a href="#">
+                                    <div class="country-overlay">
+                                        <p class="text-white font-weight-bold cavet">London Event</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="country-bg" style="background-image: url('{% static 'images/background.jpg' %}');">
+                                <a href="#">
+                                    <div class="country-overlay">
+                                        <p class="text-white font-weight-bold cavet">Sydney Event</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END COUNTRY BASED EVENT -->
+
+            <!-- WORLD WIDE EVET -->
+            <section class="popular-event mb-4">
+                <h3 class="text-uppercase text-center pb-4">Worldwide trending events</h3>
+                <div class="event-loop-content ">
+                    <div class="row">
+                        
+                        <div class="col-sm-4">
+                            <div class="card mb-4" >
+                                
+                                <a href="#">
+                                    <img class="card-img-top" src="{% static 'images/yoga.jpg' %}" alt="Card image cap">
+                                    <div class="card-body">
+                                        <div class="event-meta">
+                                            <div class="media-left pr-2">
+                                                <i class="icofont-calendar"></i>
+                                                <span class="up-month text-danger">May</span>
+                                                <span class="up-day">29-31</span>
+                                            </div>
+                                            <div class="media-right pl-2">
+                                                <h6>Medical Expo Kolkata 2020</h6>
+                                                <p class="mb-0"><span class="event-venu"><i class="icofont-location-pin"></i> Biswa Bangla Convention Centre</span></p>
+                                                <p class="mb-0">
+                                                    <span class="tick-price">
+                                                        <i class="icofont-ticket"></i> Free
+                                                    </span>
+                                                </p>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="card mb-4" >
+                                
+                                <a href="#">
+                                    <img class="card-img-top" src="{% static 'images/yoga.jpg' %}" alt="Card image cap">
+                                    <div class="card-body">
+                                        <div class="event-meta">
+                                            <div class="media-left pr-2">
+                                                <i class="icofont-calendar"></i>
+                                                <span class="up-month text-danger">May</span>
+                                                <span class="up-day">29-31</span>
+                                            </div>
+                                            <div class="media-right pl-2">
+                                                <h6>Medical Expo Kolkata 2020</h6>
+                                                <p class="mb-0"><span class="event-venu"><i class="icofont-location-pin"></i> Biswa Bangla Convention Centre</span></p>
+                                                <p class="mb-0">
+                                                    <span class="tick-price">
+                                                        <i class="icofont-ticket"></i> Free
+                                                    </span>
+                                                </p>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="card mb-4" >
+                                
+                                <a href="#">
+                                    <img class="card-img-top" src="{% static 'images/yoga.jpg' %}" alt="Card image cap">
+                                    <div class="card-body">
+                                        <div class="event-meta">
+                                            <div class="media-left pr-2">
+                                                <i class="icofont-calendar"></i>
+                                                <span class="up-month text-danger">May</span>
+                                                <span class="up-day">29-31</span>
+                                            </div>
+                                            <div class="media-right pl-2">
+                                                <h6>Medical Expo Kolkata 2020</h6>
+                                                <p class="mb-0"><span class="event-venu"><i class="icofont-location-pin"></i> Biswa Bangla Convention Centre</span></p>
+                                                <p class="mb-0">
+                                                    <span class="tick-price">
+                                                        <i class="icofont-ticket"></i> Free
+                                                    </span>
+                                                </p>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- END WORLDWIDE EVENT -->
+        </div>
+    </main>
+{% endblock %}

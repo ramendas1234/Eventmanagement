@@ -2,8 +2,21 @@ from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime
+from django.utils.html import mark_safe
 
 # Create your models here.
+
+class Category(models.Model):
+	name = models.CharField(max_length=200,default="")
+	description = models.TextField(help_text="enter category description",default="")
+	image = models.ImageField(upload_to='catalog/uploads', default="")
+	def image_tag(self):
+		return mark_safe('<img src="%s" width="150" height="150" />' % (self.image.url))
+	image_tag.short_description = 'Image'
+	def __str__(self):
+		return self.name
+
+
 class Event(models.Model):
 	title = models.CharField(max_length=300,  help_text="Enter event name",null=True,blank=True)
 	description = models.TextField(blank=True,help_text="enter event description")
@@ -35,12 +48,37 @@ class Event(models.Model):
 	address = models.CharField(max_length=500,  null=True,blank=True)
 	latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
 	longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
+	category = models.ManyToManyField(Category, help_text="Select category for this event")
+	banner_image = models.ImageField(upload_to='catalog/uploads', default="")
+	def banner_image_tag(self):
+		print(self.banner_image.url)
+		# pass
+		return mark_safe('<img src="{0}" width="100%" height="300" />'.format(self.banner_image.url))
+	thumb_image = models.ImageField(upload_to='catalog/uploads', default="")
+	def thumb_image_tag(self):
+		print(self.thumb_image.url)
+		return mark_safe('<img src="{0}" width="300" height="300" />'.format(self.thumb_image.url))
+	
+	def __str__(self):
+		return self.title
+
+
+
+class Image(models.Model):
+	event = models.ForeignKey(Event, related_name='images',on_delete=models.CASCADE)
+	file = models.ImageField(upload_to='catalog/uploads')
+	position = models.PositiveSmallIntegerField(default=0)
+
+	class Meta:
+		ordering = ['position']
+	def __str__(self):
+		return '{0} - {1} '.format(self.event, self.file)
+
+
 
 class City(models.Model):
 	name = models.CharField(max_length=300,  help_text="Enter city name",null=True,blank=True)
 	def __str__(self):
 		return self.name
-class Category(models.Model):
-	name = models.CharField(max_length=200,null=True)
-	description = models.TextField(blank=True,help_text="enter category description")
+
 	

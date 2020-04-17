@@ -14,7 +14,7 @@ Event
 => lattitude(varchar).......done
 => longitude(varchar).......done
 => event_type(varchar, one to many)-------- done
-=> event_category(varchar, many to many)
+=> event_category(varchar, many to many)........done
 => event_video_url(varchar)
 => website_link(varchar)
 => listing_type(varchar  public or private)

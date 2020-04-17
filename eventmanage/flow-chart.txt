@@ -4,9 +4,9 @@ Event
 => publish_date(datetime field) -- done
 => description(Longtext) --- done 
 => author_id(varchar)----- done
-=> banner_image(imageField)
-=> thumb_image(imageField)
-=> image_gallery(imageField)
+=> banner_image(imageField).......done
+=> thumb_image(imageField)......done
+=> image_gallery(imageField)......done
 => event startdate(datetime field)---- done
 => event enddate(datetime field)---- done
 => event place(varchar field)---- done

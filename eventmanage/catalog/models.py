@@ -58,7 +58,13 @@ class Event(models.Model):
 	def thumb_image_tag(self):
 		print(self.thumb_image.url)
 		return mark_safe('<img src="{0}" width="300" height="300" />'.format(self.thumb_image.url))
-	
+	video_url = models.CharField(max_length=500 ,default="")
+	website_link = models.CharField(max_length=300 ,default="")
+	LISTING_TYPE = [
+	('public', 'Public'),
+	('private', 'Private'),
+	]
+	listing_type = models.CharField(max_length=10,choices=LISTING_TYPE, default='public')
 	def __str__(self):
 		return self.title
 

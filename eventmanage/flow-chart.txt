@@ -1,0 +1,47 @@
+Event
+=> id(primary key)
+=> title(varchar) --- done
+=> publish_date(datetime field) -- done
+=> description(Longtext) --- done 
+=> author_id(varchar)----- done
+=> banner_image(imageField)
+=> thumb_image(imageField)
+=> image_gallery(imageField)
+=> event startdate(datetime field)---- done
+=> event enddate(datetime field)---- done
+=> event place(varchar field)---- done
+=> location(text field)......done
+=> lattitude(varchar).......done
+=> longitude(varchar).......done
+=> event_type(varchar, one to many)-------- done
+=> event_category(varchar, many to many)
+=> event_video_url(varchar)
+=> website_link(varchar)
+=> listing_type(varchar  public or private)
+=> ticket_id(varchar)
+=> is_featured(varchar)
+
+
+Tickit
+=> id(primary key)
+=> tickit_name(varchar)
+=> no_tickit_sell(varchar)
+=> tickit_price(varchar)
+=> payment_currency(varchar)
+=> payment_type(varchar  online or pay at venue)
+=> event_id(varchar)
+=> qty(varchar)
+
+
+Attendee 
+=> id(primary key)
+=> attendee_name(varchar)
+=> attendee_email(varchar)
+=> attendee_mobile(varchar)
+=> ticket_id(varchar)
+
+
+Category
+=> id(primary key)
+=> name(varchar)
+=> description(varchar)

@@ -3,16 +3,17 @@ django.jQuery(document).ready(function($){
  var prev_el_selector = '.form-row.field-address';
   // If we don't have a lat/lon in the input fields,
   // this is where the map will be centered initially.
-  var initial_lat = 51.516448,
-      initial_lon = -0.130463;
-
+  event_lat_val = $('#id_latitude').val();
+  event_lng_val = $('#id_longitude').val();
+  var initial_lat = (!event_lat_val)?51.516448:parseInt(event_lat_val),
+      initial_lon = (!event_lng_val)?-0.130463:parseInt(event_lng_val);
   // The input elements we'll put lat/lon into and use
   // to set the map's initial lat/lon.
   var lat_input_selector = '#id_latitude',
       lon_input_selector = '#id_longitude';    
 
   // Initial zoom level for the map.
-  var initial_zoom = 6;
+  var initial_zoom = 8;
 
   // Initial zoom level if input fields have a location.
   var initial_with_loc_zoom = 12;
@@ -31,6 +32,7 @@ function initMap(){
     };
     $prevEl.after( $('<div class="js-setloc-map setloc-map"></div>') );
     var mapEl = document.getElementsByClassName('js-setloc-map')[0];
+    var latlng = new google.maps.LatLng($lat.val(),$lon.val());
 
     map = new google.maps.Map(mapEl, {
       zoom: initial_zoom,
@@ -40,6 +42,7 @@ function initMap(){
     var input = document.getElementById('id_address');
     var autocomplete = new google.maps.places.Autocomplete(input,{types: ['(cities)']});
     var marker = new google.maps.Marker({
+          position: new google.maps.LatLng($lat.val(), $lon.val()),
           map: map,
           anchorPoint: new google.maps.Point(0, -29)
         });
@@ -60,7 +63,6 @@ function initMap(){
             map.setCenter(place.geometry.location);
             map.setZoom(17);  // Why 17? Because it looks good.
           }
-
           marker.setPosition(place.geometry.location);
           marker.setVisible(true);
           // console.log(marker.getPosition().lat())
@@ -106,6 +108,12 @@ function initMap(){
          console.log(place)
       }); */
 initMap();
+
+if($('#id_event_venue').val() == 'venue'){
+  $('.location-meta').show();
+}else{
+  $('.location-meta').hide();
+}
 
 $(document).on('change','#id_event_venue',function(){
 	var venue_type = $(this).val() ;

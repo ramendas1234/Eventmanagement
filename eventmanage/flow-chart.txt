@@ -15,9 +15,9 @@ Event
 => longitude(varchar).......done
 => event_type(varchar, one to many)-------- done
 => event_category(varchar, many to many)........done
-=> event_video_url(varchar)
-=> website_link(varchar)
-=> listing_type(varchar  public or private)
+=> event_video_url(varchar)----------done
+=> website_link(varchar)------------done
+=> listing_type(varchar  public or private)----------done
 => ticket_id(varchar)
 => is_featured(varchar)
 
@@ -26,11 +26,23 @@ Tickit
 => id(primary key)
 => tickit_name(varchar)
 => no_tickit_sell(varchar)
+=> tickit_type(paid or free)
 => tickit_price(varchar)
 => payment_currency(varchar)
 => payment_type(varchar  online or pay at venue)
 => event_id(varchar)
 => qty(varchar)
+
+Attendee information
+=> id(primary key)
+=> attendee_name
+=> attendee_email
+=> attendee_mobile
+=> booking_qty
+=> booking_qty
+=> tickit_id
+
+
 
 
 Attendee 

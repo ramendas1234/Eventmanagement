@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Event, City, Category, Image
+from .models import Event, City, Category, Image, Tickit
 from django.conf import settings
 
 @admin.register(City)
@@ -21,12 +21,15 @@ class ImageInline(admin.StackedInline):
 	model = Image
 	extra = 0
 	verbose_name_plural = "Image Galleries"
+class TickitInline(admin.TabularInline):
+	model = Tickit
+
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
 	# form = EventForm
 	search_fields = ['title','description']
-	inlines = [ImageInline]
+	inlines = [TickitInline,ImageInline]
 	fieldsets = (
 		('Event summary', {
 			'fields': ( 'title', 'description','author','event_type','category')
@@ -42,6 +45,9 @@ class EventAdmin(admin.ModelAdmin):
 			}),
 		('Event Location', {
 			'fields': ( 'event_location', 'city','address','latitude','longitude'),'classes': ['location-meta']
+			}),
+		('Event Other information', {
+			'fields': ( 'video_url', 'website_link','listing_type','featured',),
 			}),
 
 		)

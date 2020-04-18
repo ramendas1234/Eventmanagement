@@ -18,7 +18,7 @@ class Category(models.Model):
 
 
 class Event(models.Model):
-	title = models.CharField(max_length=300,  help_text="Enter event name",null=True,blank=True)
+	title = models.CharField(max_length=300,  help_text="Enter event name",default="")
 	description = models.TextField(blank=True,help_text="enter event description")
 	publish_date = models.DateTimeField(default=datetime.now,editable=False)
 	author = models.ForeignKey(settings.AUTH_USER_MODEL,
@@ -44,7 +44,7 @@ class Event(models.Model):
 	]
 	event_type = models.CharField(max_length=20,choices=EVENT_TYPES, default='conference', null=True,blank=True)
 	event_location = models.TextField(max_length=500,  null=True,blank=True)
-	city = models.ForeignKey('City', on_delete=models.SET_NULL, null=True)
+	city = models.ForeignKey('City', on_delete=models.SET_NULL, null=True,blank=True)
 	address = models.CharField(max_length=500,  null=True,blank=True)
 	latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
 	longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
@@ -65,6 +65,7 @@ class Event(models.Model):
 	('private', 'Private'),
 	]
 	listing_type = models.CharField(max_length=10,choices=LISTING_TYPE, default='public')
+	featured = models.BooleanField('make it features ? ',default=True)
 	def __str__(self):
 		return self.title
 
@@ -87,4 +88,20 @@ class City(models.Model):
 	def __str__(self):
 		return self.name
 
-	
+class Tickit(models.Model):
+	tickit_name = models.CharField(max_length=200, default="")
+	tickit_quantity = models.CharField(max_length=10, default="")
+	event = models.ForeignKey(Event,on_delete=models.CASCADE)
+	TICKIT_TYPE = [('free','Free'),('paid','Paid')]
+	tickit_type = models.CharField(max_length=5,choices=TICKIT_TYPE,default='free')
+	CURRENCY_TYPE = [('inr','INR(₹)'),]
+	payment_currency = models.CharField(max_length=20,choices=CURRENCY_TYPE,)
+	tickit_price = models.CharField(max_length = 100, default="")
+	PAYMENT_TYPE = [('online','Pay Online'),('venue','Pay at Venue')]
+	payment_type = models.CharField(max_length=10,choices=PAYMENT_TYPE, default='online')
+	def __str__(self):
+		return self.tickit_name
+
+
+
+

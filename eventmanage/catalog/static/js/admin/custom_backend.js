@@ -40,7 +40,7 @@ function initMap(){
     });
 
     var input = document.getElementById('id_address');
-    var autocomplete = new google.maps.places.Autocomplete(input,{types: ['(cities)']});
+    var autocomplete = new google.maps.places.Autocomplete(input);
     var marker = new google.maps.Marker({
           position: new google.maps.LatLng($lat.val(), $lon.val()),
           map: map,

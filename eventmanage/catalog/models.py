@@ -66,6 +66,15 @@ class Event(models.Model):
 	]
 	listing_type = models.CharField(max_length=10,choices=LISTING_TYPE, default='public')
 	featured = models.BooleanField('make it features ? ',default=True)
+	def is_online(self):
+		return True if self.event_venue is 'online' else False
+	def get_basic_price(self):
+		data = self.tickit_set.all()
+		if(len(data)>0):
+			return "₹{1}".format(data[0].payment_currency,data[0].tickit_price)
+		else:
+			return 'Free'
+		
 	def __str__(self):
 		return self.title
 

@@ -5,5 +5,6 @@ from catalog import views
 urlpatterns = [
     path('', views.index, name='index'),
     #path('books/', views.BookListView.as_view(), name='books'),
-    # path('test/', views.test),
+    path('<str:city>/', views.location_based_events, name='city-list'),
+    # path('abc/', views.test, name='city-list'),
 ]

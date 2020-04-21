@@ -177,3 +177,22 @@ body a:hover{text-decoration:none;color:#2e363f}
     line-height: 4;
     background: rgba(0,0,0,0.5);
 }
+
+
+/*   Design for city event template */
+.banner-img{
+        background-size: 100% auto;
+        background-repeat: no-repeat;
+        background-position: center;
+        position: relative;
+}
+.banner-img .overlay{
+        background: rgba(0,0,0,0.4);
+}
+
+
+
+
+.btn-group button{
+    border-radius: 20px;
+}

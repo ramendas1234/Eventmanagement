@@ -1,3 +1,8 @@
+from django.http import HttpResponse
+from django.core import serializers
+import json
+from django.template.loader import render_to_string
+from urllib.parse import parse_qs  
 from django.shortcuts import render
 from .models import Event, City, Category
 import datetime
@@ -20,3 +25,15 @@ def location_based_events(request,city):
 	'categories': categories
 	}
 	return render(request, 'city_events.html',{'data':data})
+
+def event_filtration(request,city):
+	now = datetime.datetime.now()
+	time = request.POST.get('filterby_time','')
+	catgid = request.POST.get('filterby_category','')
+	sortby = request.POST.get('sort_by','')
+	events = Event.objects.filter( Q(event_end_date__gt=now) & Q(listing_type='public') )
+	if(catgid):
+		events = events.filter(Q(category = catgid))
+	html = render_to_string('hello_world.html', {'events': events})
+
+	return HttpResponse(html)

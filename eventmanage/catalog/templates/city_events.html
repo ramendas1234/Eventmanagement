@@ -15,18 +15,22 @@ Embark on a musical journey with your dear ones. Explore music events in Kolkata
 </div>
 
 <div class="container">
-
+{% if data.events %}
 <section class="filter-section my-4">
 	<div class="filter-nav">
 		<h4>Events filter by</h4>
 		
 			<!-- Example single danger button -->
-		
+<form id="filterForm" method="post" action="">
+	{% csrf_token %}
+	<input type="hidden" value="" id="filterTime" name="filterby_time" >
+	<input type="hidden" value="" id="filterCategory" name="filterby_category" >
+	<input type="hidden" value="" id="sortBy" name="sort_by" >
 <div class="btn-group mr-4">
-  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <button class="btn btn-primary dropdown-toggle" type="button" id="filterByTimeButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Any Date
   </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+  <div class="dropdown-menu filter-by-time" aria-labelledby="filterByTimeButton">
     <a class="dropdown-item" href="#">Today</a>
     <a class="dropdown-item" href="#">Tommorow</a>
     <a class="dropdown-item" href="#">This weekend</a>
@@ -34,69 +38,33 @@ Embark on a musical journey with your dear ones. Explore music events in Kolkata
   </div>
 </div>
 <div class="btn-group mr-4">
-  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <button class="btn btn-primary dropdown-toggle" type="button" id="filterByCategoryButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Any Categories
     
   </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+  <div class="dropdown-menu filter-by-category" aria-labelledby="filterByCategoryButton">
+  	<a class="dropdown-item" href="javascript:void(0);" data-catgid=""> All Categories </a>
   	{% for ctg in data.categories %}
-    <a class="dropdown-item" href="javascript:void(0);" data-catgId="{{ ctg.0 }}" >{{ ctg.1 }}</a>
+    <a class="dropdown-item" href="javascript:void(0);" data-catgid="{{ ctg.0 }}" >{{ ctg.1 }}</a>
     {% endfor %}
   </div>
 </div>
 <div class="btn-group mr-4">
-  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <button class="btn btn-primary dropdown-toggle" type="button" id="sortByButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Sort by
   </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+  <div class="dropdown-menu sort-by" aria-labelledby="sortByButton">
     <a class="dropdown-item" href="#">Latest</a>
     <a class="dropdown-item" href="#">Popular</a>
   </div>
 </div>
-
+</form>
 </div>
 </section>
-
+{% endif %}
 	<section class="city-event-inner-section">
-		<div class="row">
-
-			{% if data.events %}
-			{% for event in data.events %}
-			<div class="col-sm-4">
-                            <div class="card mb-4" >
-                                
-                                <a href="#">
-                                    <img class="card-img-top" src="{{event.thumb_image.url}}" alt="Card image cap">
-                                    <div class="card-body">
-                                        <div class="event-meta">
-                                            <div class="media-left pr-2">
-                                                <i class="icofont-calendar"></i>
-                                                <span class="up-month text-danger">{{ event.event_start_date|date:"M" }}</span>
-                                                <span class="up-day">{{ event.event_start_date|date:"d" }}</span>
-                                            </div>
-                                            <div class="media-right pl-2">
-                                                <h6>{{ event.title }}</h6>
-                                                <p class="mb-0"><span class="event-venu"><i class="icofont-location-pin"></i> {% if event.is_online %}
-                                                Online
-                                                {% else %}
-                                                {{ event.address }}
-                                                {% endif %}
-                                                </span></p>
-                                                <p class="mb-0">
-                                                    <span class="tick-price">
-                                                        <i class="icofont-ticket"></i> {{ event.get_basic_price }}	
-                                                    </span>
-                                                </p>
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-            {% endfor %}
-            {% endif %}            
-                      
+		<div class="row" id="event-list-inner" >
+			{% include "hello_world.html" with events=data.events %}    
 		</div>
 	</section>
 </div>

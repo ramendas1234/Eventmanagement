@@ -1,12 +1,51 @@
 {% extends 'base_generic.html' %}
 {% load static %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/3d-slider.css' %}" >
+{% endblock %}
 {% block body %}
 
-<div class="non-overlay banner-img banner" style="background-image: url('{% if data.city.city_image %} {{ data.city.city_image.url }} {% else %} {% static 'images/61564.jpg' %} {% endif %}');">
+<h3 class="text-center text-uppercase my-4">Online events</h3>
+<div class="banner">
+  {% if data.online_events %}
+        <section id="dg-container" class="dg-container">
+            <div class="dg-wrapper">
+              {% for item in data.online_events %}
+                <a href="#">
+                    
+          <div class="card">
+          <img class="card-img-top img-fluid" src="{{ item.thumb_image.url }}" alt="{{ item.title }}">
+          <div class="card-body">
+            <h4 class="card-title">{{ item.title }}</h4>
+            <p class="card-text"><span class="date"><i class="icofont-calendar"></i>{{ item.event_start_date|date:'d-m-Y' }}</span></p>
+          </div>
+        </div>
+                </a>
+                {% endfor %}
+                
+            </div>
+            <ol class="button" id="lightButton">
+              {% for item in data.online_events %}
+                <li index="{{ forloop.counter }}">
+              {% endfor %}  
+            </ol>
+            <nav>
+                <span class="dg-prev"></span>
+                <span class="dg-next"></span>
+            </nav>
+        </section>
+        {% endif %}
+    </div>
+  <div style="height:200px; width: 100%;"></div>
+
+
+
+
+<div class="non-overlay banner-img banner" style="background-image: url('{% static 'images/61564.jpg' %}');">
 	<div class=" overlay " >
 		<div class="container py-4">
-			<h3 class="text-white text-uppercase">{{ data.city.heading }}</h3>
-			<p class="text-white">{{ data.city.description }}</p>
+			<h3 class="text-white">Promote Your event</h3>
+			<a href="#" class="btn btn-group-lg btn-primary">Promote Now</a>
 		</div>
 	</div>
 </div>
@@ -19,12 +58,13 @@
 
 		
 			<!-- Example single danger button -->
-<form id="filterForm" method="post" action="event-filter/">
+<form id="filterForm" method="post" action="filter/">
 	{% csrf_token %}
 	<input type="hidden" value="" id="filterTime" name="filterby_time" >
 	<input type="hidden" value="" id="filterCategory" name="filterby_category" >
 	<input type="hidden" value="" id="filterListingType" name="listing_type" >
 	<input type="hidden" value="" id="sortBy" name="sort_by" >
+  
 <div class="btn-group mr-4">
   <button class="btn btn-primary dropdown-toggle" type="button" id="filterByTimeButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Any Date
@@ -48,7 +88,16 @@
     {% endfor %}
   </div>
 </div>
-
+<div class="btn-group mr-4">
+  <button class="btn btn-primary dropdown-toggle" type="button" id="listingButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Listing Types
+  </button>
+  <div class="dropdown-menu listing-type" aria-labelledby="listingButton">
+  	<a class="dropdown-item" data-value="" href="javascript:void(0);">Show All Type</a>
+    <a class="dropdown-item" data-value="online" href="javascript:void(0);">Online</a>
+    <a class="dropdown-item" data-value="venue" href="javascript:void(0);">Venue</a>
+  </div>
+</div>
 <div class="btn-group mr-4">
   <button class="btn btn-primary dropdown-toggle" type="button" id="sortByButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Sort by
@@ -72,8 +121,6 @@
 {% endblock %}
 
 {% block js %}
-<script>
- 
-</script>
+<script src="{% static 'js/3d-slider.js' %}"></script>
 
 {% endblock %}

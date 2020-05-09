@@ -1,3 +1,24 @@
+/*Loader style*/
+
+.page-loader{
+        position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 99;
+    display:none;
+}
+.loadin-indicator{
+    top: 50%;
+    left: 50%;
+    position: fixed;
+    color: wheat;
+}
+
 body a{text-decoration:none;}
 body a, p, h1,h2, h3, h4, h5, span{    color: #2e363f;font-family: 'Cairo', sans-serif;}
 .permanent-marker{
@@ -52,6 +73,24 @@ body a:hover{text-decoration:none;color:#2e363f}
     border-radius:0;
 }
 
+.menu-login-btn{
+    background: #e0e0e0;
+    padding: 0px 10px;
+    color: #037bff;
+}
+
+.btn-fb{
+background-color: #23345a;
+}
+.btn-gp{
+    background-color: #a32b1c;
+}
+.btn-social{
+    color: #fff;
+    border-color: rgba(0,0,0,0.2);
+    padding: 5px 20px;
+}
+
 @media (min-width: 992px){
     .search-sec{
         position: relative;
@@ -68,7 +107,12 @@ body a:hover{text-decoration:none;color:#2e363f}
 /* End style home banner */
 
 /* START SECTION DESIGN */
-
+.featured-icon img{
+    width: 80px;
+    position: absolute;
+    transform: rotate(-86deg);
+    z-index: 99;
+}
 .event-meta{display: inline-block;}
 .event-meta .media-left{    float: left;
     width: 20%;}
@@ -196,3 +240,10 @@ body a:hover{text-decoration:none;color:#2e363f}
 .btn-group button{
     border-radius: 20px;
 }
+
+
+
+
+
+
+

@@ -94,6 +94,9 @@ class Image(models.Model):
 
 class City(models.Model):
 	name = models.CharField(max_length=300,  help_text="Enter city name",null=True,blank=True)
+	heading = models.CharField(max_length=300, default="")
+	description = models.TextField(default="")
+	city_image = models.ImageField(upload_to='catalog/uploads', default="")
 	def __str__(self):
 		return self.name
 

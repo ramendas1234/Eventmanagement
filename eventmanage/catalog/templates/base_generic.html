@@ -16,10 +16,17 @@
 	{% block title %}<title>Hello, world!</title>{% endblock %}
   </head>
   <body>
+   {% block style %}
+   {% endblock %}
+   <div class="text-center page-loader">
+  <div class="spinner-border loadin-indicator" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
 	{% block header %}
 	<div class="header-nav">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" href="#"><h2><span class="text-white"><span class="permanent-marker no-shadow" style="font-size: 45px;">E</span>vent</span><span class="cavet">Manage</span></h2></a>
+  <a class="navbar-brand" href="{% url 'index' %}"><h2><span class="text-white"><span class="permanent-marker no-shadow" style="font-size: 45px;">E</span>vent</span><span class="cavet">Manage</span></h2></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -27,10 +34,10 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active mx-2">
-        <a class="nav-link text-white" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link text-white" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item mx-2">
-        <a class="nav-link text-white" href="#">Events</a>
+        <a class="nav-link text-white" href="{% url 'events' %}">Events</a>
       </li>
 	  <li class="nav-item mx-2">
         <a class="nav-link text-white" href="#">About us</a>
@@ -39,6 +46,10 @@
         <a class="nav-link text-white" href="#">Contact us</a>
       </li>
     </ul>
+    <div class="mx-2">
+      <a href="#" class="menu-login-btn" data-toggle="modal" data-target="#staticBackdrop"><i class="icofont-facebook"></i>/<i class="icofont-google-plus"></i> Login</a>
+    
+    </div>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-white my-2 my-sm-0" type="submit"><span class="text-white">Search</span></button>
@@ -52,6 +63,30 @@
 	{% endblock %}
 	<!-- Footer -->
 	{% block footer %}
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    
+      <div class="modal-body text-center">
+        <div>
+        <h5 class="modal-title" style="display:inline-block;" id="staticBackdropLabel">Quick Sign In</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>  
+        </div>
+        <div class="login-modal-content-inner">
+          <p>Join events, get recommendations based on your interest. Find where your friends are going.</p>
+          <a class="btn-social btn-fb" href="javascript:void(0);" ><i class="icofont-facebook"></i></i> Sign in with google</a>
+          <a class="btn-social btn-gp" href="javascript:void(0);" ><i class="icofont-google-plus"></i> Sign in with google</a>
+        </div>
+        
+      </div>
+      
+    </div>
+  </div>
+</div>
+
 		<footer class="page-footer font-small mt-5  pt-4">
 
   <!-- Footer Links -->

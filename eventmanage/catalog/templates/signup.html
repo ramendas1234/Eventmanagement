@@ -1,0 +1,87 @@
+{% extends 'base_generic.html' %}
+{% load static %}
+{% block style %}
+
+{% endblock %}
+{% block body %}
+
+
+<div class="container">
+
+<div class="container register">
+                <div class="row">
+                    <div class="col-md-3 register-left">
+                        <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
+                        <h3 class="text-white">Welcome</h3>
+                        <p class="text-white">You are 30 seconds away from earning your own money!</p>
+                        <input type="submit" name="" value="Login"/><br/>
+                    </div>
+                    <div class="col-md-9 register-right">
+                      <form method="post">
+                        {% csrf_token %}
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <h3 class="register-heading">Be a part of Event Management</h3>
+                                <div class="row register-form">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            {{ form.first_name }}
+                                        </div>
+                                        {% if form.first_name.errors %}
+                                        <div class="alert alert-danger">{{ form.first_name.errors }}</div>
+                                        {% endif %}
+
+                                        <div class="form-group">
+                                            {{ form.password1 }}
+                                        </div>
+                                        {% if form.password1.errors %}
+                                        <div class="alert alert-danger">{{ form.password1.errors }}</div>
+                                        {% endif %}
+                                       <div class="form-group">
+                                            {{ form.username }}
+                                        </div> 
+                                        {% if form.username.errors %}
+                                       <div class="alert alert-danger">{{ form.username.errors }}</div>
+                                       {% endif %}
+                                    </div>
+                                    <div class="col-md-6">
+                                      <div class="form-group">
+                                            {{ form.last_name }}
+                                        </div>
+                                        {% if form.last_name.errors %}
+                                        <div class="alert alert-danger">{{ form.last_name.errors }}</div>
+                                        {% endif %}
+                                        <div class="form-group">
+                                            {{ form.password2 }}
+                                        </div>
+                                        {% if form.password2.errors %}
+                                        <div class="alert alert-danger">{{ form.password2.errors }}</div>
+                                        {% endif %}
+                                        <div class="form-group">
+                                            {{ form.email }}
+                                        </div>
+                                        {% if form.email.errors %}
+                                        <div class="alert alert-danger">{{ form.email.errors }}</div>
+                                        {% endif %}
+                                        
+                                        <input type="submit" class="btnRegister"  value="Register"/>
+                                    </div>
+                                  </div>
+                            </div>
+                        </div>
+                      </form>
+                    </div>
+                </div>
+
+            </div>
+</div>
+
+
+
+
+{% endblock %}
+
+{% block js %}
+
+
+{% endblock %}

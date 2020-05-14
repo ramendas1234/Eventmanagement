@@ -125,5 +125,5 @@ STATIC_ROOT = os.path.join(BASE_DIR,'static')
 # GOOGLE_MAPS_API_KEY = 'AIzaSyAvsmyVmEnpgpyR0SVuDrbule0Qk1jKX1U'
 GOOGLE_MAPS_API_KEY = 'AIzaSyChxeOfZU39KSjQ2vyFnqQOSe0oATVuWP0'
 
-
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 

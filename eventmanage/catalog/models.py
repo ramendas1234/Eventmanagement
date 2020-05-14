@@ -3,6 +3,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime
 from django.utils.html import mark_safe
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Create your models here.
 
@@ -115,5 +117,21 @@ class Tickit(models.Model):
 		return self.tickit_name
 
 
+class Profile(models.Model):
+	user = models.OneToOneField(User, on_delete=models.CASCADE)
+	first_name = models.CharField(max_length=100, blank=True)
+	last_name = models.CharField(max_length=100, blank=True)
+	email = models.EmailField(max_length=150)
+	address = models.CharField(max_length=100, blank=True, default='')
+	bio = models.TextField()
+	signup_confirmation = models.BooleanField(default=False)
+	def __str__(self):
+		return self.user.username
 
-
+@receiver(post_save, sender=User)
+def update_profile_signal(sender, instance, created, **kwargs):
+	print('admin login')
+	if created:
+		Profile.objects.create(user=instance)
+	if not instance.is_superuser:	
+		instance.profile.save()

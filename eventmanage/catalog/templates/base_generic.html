@@ -48,7 +48,13 @@
     </ul>
     <div class="mx-2">
       <a href="#" class="menu-login-btn" data-toggle="modal" data-target="#staticBackdrop"><i class="icofont-facebook"></i>/<i class="icofont-google-plus"></i> Login</a>
-    
+      {% if user.is_authenticated %}
+      <a href="#" class="menu-login-btn" >Dashboard</a>
+      <a href="{% url 'logout' %}" class="menu-login-btn" >Logout</a>
+      {% else %}
+      <a href="{% url 'signin' %}" class="menu-login-btn" >Login</a>
+      <a href="{% url 'signup' %}" class="menu-login-btn" >Registration</a>
+      {% endif %}
     </div>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">

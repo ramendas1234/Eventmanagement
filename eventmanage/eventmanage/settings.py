@@ -37,7 +37,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-	'catalog'
+    'django.contrib.sites',
+	'catalog',
+
+    #all auth
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
+    #providers
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google'
 ]
 
 MIDDLEWARE = [
@@ -127,3 +137,6 @@ GOOGLE_MAPS_API_KEY = 'AIzaSyChxeOfZU39KSjQ2vyFnqQOSe0oATVuWP0'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+SITE_ID = 1
+
+LOGIN_REDIRECT_URL = '/'

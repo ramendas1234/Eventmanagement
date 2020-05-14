@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	{% load static %}
+  {% load socialaccount %}
+  {% providers_media_js %}
     <!-- Bootstrap CSS -->
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
@@ -47,7 +49,7 @@
       </li>
     </ul>
     <div class="mx-2">
-      <a href="#" class="menu-login-btn" data-toggle="modal" data-target="#staticBackdrop"><i class="icofont-facebook"></i>/<i class="icofont-google-plus"></i> Login</a>
+      <a href="" class="menu-login-btn" data-toggle="modal" data-target="#staticBackdrop"><i class="icofont-facebook"></i>/<i class="icofont-google-plus"></i> Login</a>
       {% if user.is_authenticated %}
       <a href="#" class="menu-login-btn" >Dashboard</a>
       <a href="{% url 'logout' %}" class="menu-login-btn" >Logout</a>
@@ -83,7 +85,7 @@
         </div>
         <div class="login-modal-content-inner">
           <p>Join events, get recommendations based on your interest. Find where your friends are going.</p>
-          <a class="btn-social btn-fb" href="javascript:void(0);" ><i class="icofont-facebook"></i></i> Sign in with google</a>
+          <a class="btn-social btn-fb" href="{% provider_login_url 'facebook' method='oauth2' %}" ><i class="icofont-facebook"></i></i> Sign in with facebook</a>
           <a class="btn-social btn-gp" href="javascript:void(0);" ><i class="icofont-google-plus"></i> Sign in with google</a>
         </div>
         

@@ -403,7 +403,7 @@ $(function () {
       this.$nextItm.css(this._getCoordinates("outright"));
       this.$prevItm.css(this._getCoordinates("outleft"));
 
-      this.$currentItm[0].href = this.$currentItm[0].getAttribute("link");
+      //this.$currentItm[0].href = this.$currentItm[0].getAttribute("link");
     },
 
     // 更新图片位置
@@ -450,9 +450,9 @@ $(function () {
           _self.isAnim = false;
 
           // 处理中间元素的href
-          _self.$currentItm[0].href = _self.$currentItm[0].getAttribute("link");
-          _self.$leftItm[0].href = "#";
-          _self.$rightItm[0].href = "#";
+          //_self.$currentItm[0].href = _self.$currentItm[0].getAttribute("link");
+          //_self.$leftItm[0].href = "#";
+          //_self.$rightItm[0].href = "#";
 
           // 处理左右元素的点击事件
           _self._click(_self.$leftItm, "prev");

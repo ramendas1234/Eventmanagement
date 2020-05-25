@@ -1,3 +1,4 @@
+from .models import Profile
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -22,4 +23,8 @@ class SignUpForm(UserCreationForm):
             'username': forms.TextInput(attrs={'placeholder': 'Enter username'}),
         }
 
-        
+class ProfileImageUpload(forms.ModelForm):
+    
+    class Meta:
+        model = Profile
+        fields = ['profile_image',]    

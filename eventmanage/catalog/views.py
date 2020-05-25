@@ -13,14 +13,25 @@ from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from urllib.parse import parse_qs  
 from django.shortcuts import render, redirect
-from .models import Event, City, Category
-from .forms import SignUpForm
+from .models import Event, City,Profile, Category,remove,is_username_use,is_email_use,handle_uploaded_file
+from .forms import SignUpForm, ProfileImageUpload
 import datetime
 from django.db.models import Q
 from django.contrib import auth
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+
+# 404 page
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+
+# Event Detail Page
+from django.views import generic
+
+import re
+import json
+EMAIL_REGEX = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
 # Create your views here.
 
 def index(request):
@@ -63,7 +74,7 @@ def location_based_events(request,city):
 	now = datetime.datetime.now()
 	city_data = City.objects.filter(name=city)
 	if not city_data:
-		return render(request, 'index.html')
+		return render(request,'404.html')
 	cityId = city_data[0].id
 	events = Event.objects.filter(Q(city_id = cityId)& Q(event_end_date__gt=now) & Q(listing_type='public') )
 	categories = Category.objects.values_list('id','name')
@@ -78,7 +89,7 @@ def event_filtration(request,city):
 	now = datetime.datetime.now()
 	city_data = City.objects.filter(name=city)
 	if not city_data:
-		return render(request, 'index.html')
+		return render(request,'404.html')
 	cityId = city_data[0].id
 	time = request.POST.get('filterby_time','')
 	catgid = request.POST.get('filterby_category','')
@@ -177,10 +188,113 @@ def signin_view(request):
 				messages.error(request,'Your account is not activate')
 			else:
 				login(request, user)
-				return redirect('index')	
+				return redirect('/profile/update')	
 			
 	return render(request, 'signin.html')
 
 def logout(request):
 	auth.logout(request)
 	return redirect('index')		
+
+def view_dashboard(request, queryvar):
+	print(queryvar)
+	form = ProfileImageUpload()
+	if not request.user.is_authenticated:
+		return redirect('signin')
+
+	profile = Profile.objects.get(user_id=request.user)
+		
+	if queryvar=='update':
+		if request.method=='POST':
+			data = {'flag':False, 'msg':''}
+			first_name = remove(request.POST.get('first_name'))
+			last_name = remove(request.POST.get('last_name'))
+			username = remove(request.POST.get('username'))
+			email = remove(request.POST.get('email'))
+			CurrentUser = request.user
+			if CurrentUser is None:
+				data['msg'] = 'Please login and tray again'
+			elif not len(first_name)>0:
+				data['msg'] = 'Please enter first name'
+			elif not len(last_name)>0:
+				data['msg'] = 'Please enter last name'
+			elif not len(username)>0:
+				data['msg'] = 'Please enter user name'
+			elif not is_username_use(username, CurrentUser.pk):
+				data['msg'] = 'Sorry this username already use by another user'	
+			elif not len(email)>0:
+				data['msg'] = 'Please enter email'
+			elif not re.match(EMAIL_REGEX, email):
+				data['msg'] = 'Please enter a valid email'
+			elif not is_email_use(email, CurrentUser.pk):
+				data['msg'] = 'Sorry this email already use by another user'		
+			else:
+				CurrentUser.first_name = first_name
+				CurrentUser.last_name = last_name
+				CurrentUser.username = username
+				CurrentUser.email = email
+				CurrentUser.save()
+				data['msg'] = 'Your profile update successfully'
+				data['flag'] = True
+			response = json.dumps(data)
+			return HttpResponse(response)	
+		else:	
+			return render(request,'dashboard/account_update.html',{'form':form,'profile_image':profile.profile_image})
+
+	if queryvar=='updateprofileimage':
+		if request.method == 'POST':
+			profile = Profile.objects.get(user_id=request.user)
+			form = ProfileImageUpload(request.POST, request.FILES, instance=profile)
+
+			if form.is_valid():
+				profile = form.save()
+		return render(request,'dashboard/account_update.html',{'form':form,'profile_image':profile.profile_image})
+			
+	return render(request,'404.html')
+
+
+class EventDetailView(generic.DetailView):
+	model = Event
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['is_details'] = True
+		return context
+
+
+
+def handler404(request, exception):
+	print('404 --------')
+	return render(request, '404.html', status=404)
+
+# def handler500(request):
+# 	print('500--------')
+# 	return render(request, '404.html', status=500)
+
+
+def test(request):
+	print('test')
+	if request.method == 'POST':
+		files = request.FILES
+		print(files)
+
+		
+		profile = Profile.objects.get(user_id=request.user)
+		print('current user------', request.user)
+		print('Profile -----------', profile)
+		print(profile.first_name)
+		print(profile.last_name)
+		form = ProfileImageUpload(request.POST, request.FILES, instance=profile)
+		print(form)
+		if form.is_valid():
+			profile = form.save()
+			
+
+		else:
+			print(form.errors)	
+		# files = request.FILES
+		# attached_file1 = files.get('file1', None)
+		# handle_uploaded_file(attached_file1)
+		# print(attached_file1)
+		# full_filename = '/media/'+'catalog/uploads'+attached_file1
+		
+	return HttpResponse('testing')

@@ -17,8 +17,17 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from . import settings
+
+from django.conf.urls import handler404, handler500
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 	path('', include('catalog.urls')),
 	path('accounts/', include('allauth.urls'))
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+
+# project/urls.py
+
+handler404 = 'catalog.views.handler404'
+# handler500 = 'catalog.views.handler500'

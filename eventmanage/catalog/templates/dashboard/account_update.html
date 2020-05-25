@@ -1,0 +1,27 @@
+{% extends 'dashboard/dashboard.html' %}
+{% block dashboard_right %}
+    
+    <h3 class="text-center mb-5">Update Profile</h3>
+    <form method="post" id="update_profile">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-sm-6">
+                <input type="text" name="first_name" placeholder="Enter First Name" value="{{ user.first_name }}" class="form-control form-group" required="" id="first_name">
+            </div>
+            <div class="col-sm-6">
+                <input type="text" name="last_name" placeholder="Enter Last Name" value="{{ user.last_name }}" class="form-control form-group" required="" id="last_name">
+            </div>
+            <div class="col-sm-6">
+                <input type="text" name="username" placeholder="Enter username" value="{{ user.username }}" class="form-control form-group" required="" id="username">
+            </div>
+            <div class="col-sm-6">
+                <input type="text" name="email" placeholder="Enter Email" value="{{ user.email }}" class="form-control form-group" required="" id="email">
+            </div>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary text-white">Update</button>
+        </div>
+    </form>
+    
+    
+{% endblock %}

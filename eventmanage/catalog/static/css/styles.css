@@ -411,3 +411,214 @@ background-color: #23345a;
 .activation-sent i{
     
 }
+
+
+/*  Dashboard css style  */
+#upload-container input{
+    opacity: 0;
+    display: inline-block;
+    width: 20px;
+    position: absolute;
+    z-index: 9999;
+}
+#upload-container{
+        font-size: 30px;
+    position: relative;
+    bottom: 38px;
+    left: 20px;
+}
+#upload-container i{
+    position: relative;
+    left: 12px;
+    top: -5px
+}
+.dashboard-nav .navbar-nav li{
+        border-bottom: white solid 1px;
+    padding: 0px 5px;
+}
+
+.dashboard-nav  p, .dashboard-nav h4,.dashboard-nav h5, .dashboard-nav h6{
+    padding: 0px 5px;
+    color: #fff;
+}
+
+.profile-img-wrap img{
+       width: 150px;
+    height: 150px;
+}
+
+.profile-img-wrap{
+    position: relative;
+    height: 156px;
+    width: 156px;
+    border-radius: 50%;
+    border: #007bff solid 3px;
+    display: inline-block;
+}
+.profile-image-loader{
+        position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.5);
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    color: #fff;
+    padding-top: 40%;
+    display: none;
+}
+.profile-logo h6, span {
+    color: #2e363f;
+}
+.profile-logo{
+    padding-left: 5px;
+}
+.profile-logo ul{
+    padding: 0;
+        display: flex;
+    list-style: none;
+}
+.dashboard-section{
+    padding: 50px 0px;
+}
+.dashboard-left{
+        background: #fbfbfb;
+    box-shadow: #e4e4e4 1px 1px 2px 2px;
+}
+
+.dashboard-social ul{
+     padding: 0;
+        display: flex;
+    list-style: none;
+}
+.dashboard-social ul li{
+    margin: 5px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding-top: 3px;
+}
+.dashboard-social ul li a{
+    color: #fff;
+}
+.share-facebook{
+    background: #3b5998;
+}
+.share-linkdin{
+    background: #4aa8db;
+}
+.share-twitter{
+    background: #4cc2ff;
+}
+.share-google-plus{
+    background: #dd4b39;
+}
+.share-pinterest{
+    background: #c91a22;
+}
+.dashboard-nav ul li.active{
+        background: #007bff;/*#d6861d*/
+}
+.bg-black{
+    background: #000;
+}
+.dashboard-nav ul.navbar-nav li.nav-item a{
+    color: #fff;
+}
+.dashboard-content{
+    box-shadow: 2px 1px 5px #cac3c3;
+}
+
+/*  Dashboard  CSS END  */
+
+
+
+
+/*   404 page not found   */
+.page-not-found{
+    min-height: 300px;
+    line-height: 300px;
+}
+.page-not-found h1{
+    display: inline-block;
+    vertical-align: middle;
+    color: #007bff;
+    font-size: 98px;
+}
+
+/*  Details page design */
+.gray-bg{
+    background: rgba(185, 183, 183, 0.3);
+}
+
+
+.common-details{
+    background: #fff;
+    box-shadow: #b1aeae 2px 1px 3px 1px;
+}
+
+.event-head{
+    position: relative;
+    bottom: 88px;
+}
+.event-head img{
+    width: 100%;
+    height: 110px;
+}
+.buy-tickits{
+    min-height: 100px;
+    line-height: 100px;
+}
+.buy-tickits .wrn-btn{
+   padding-top: 10px;
+}
+.image-banner{
+    width: 100%;
+    height: 300px;
+    display: inline-block;
+    overflow: hidden;
+}
+.image-banner img{
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+.event-details-left-container .content ul{
+    padding: 0;
+    display: flex;
+    list-style: none;
+}
+.btn-round{
+    background: #e0e0e0;
+    padding: 5px 20px;
+    border-radius: 20px;
+}
+.event-organizer .media img{
+    width: 80px;
+}
+.event-organizer .media-body ul{
+        padding: 0;
+    display: flex;
+    list-style: none;
+}
+.event-organizer .menu-login-btn{
+    color: #212529;
+    font-size:10px;
+}
+.event-share ul{
+    padding: 0;
+    display: flex;
+    list-style: none;
+}
+.event-share ul li{
+    margin: 5px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding-top: 3px;
+}
+.event-share ul li a{
+    color: #fff;
+}

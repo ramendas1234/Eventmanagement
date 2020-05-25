@@ -11,7 +11,8 @@
         <section id="dg-container" class="dg-container">
             <div class="dg-wrapper">
               {% for item in data.online_events %}
-                <a href="#">
+
+                <a href="{% url 'event-detail' item.pk %}" class="abc">
                     
           <div class="card">
           <img class="card-img-top img-fluid" src="{{ item.thumb_image.url }}" alt="{{ item.title }}">

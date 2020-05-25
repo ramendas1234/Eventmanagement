@@ -122,8 +122,7 @@ class Profile(models.Model):
 	first_name = models.CharField(max_length=100, blank=True)
 	last_name = models.CharField(max_length=100, blank=True)
 	email = models.EmailField(max_length=150)
-	address = models.CharField(max_length=100, blank=True, default='')
-	bio = models.TextField()
+	profile_image = models.ImageField(upload_to='catalog/uploads', default="")
 	signup_confirmation = models.BooleanField(default=False)
 	def __str__(self):
 		return self.user.username
@@ -135,3 +134,30 @@ def update_profile_signal(sender, instance, created, **kwargs):
 		Profile.objects.create(user=instance)
 	if not instance.is_superuser:	
 		instance.profile.save()
+
+def remove(string):
+	return string.replace(" ", "")
+def is_email_use(email,CurrentUserId):
+	existsUser = User.objects.filter(email=email)
+	if len(existsUser)>0:
+		if existsUser[0].pk!=CurrentUserId:
+			return False
+		else:
+			return True	
+	else:
+		return True
+def is_username_use(username, userId):
+	existsUser = User.objects.filter(username=username)
+	if len(existsUser)>0:
+		if existsUser[0].pk!=userId:
+			return False
+		else:
+			return True	
+	else:
+		return True
+
+
+def handle_uploaded_file(f):
+	with open('name.txt', 'wb+') as destination:
+		for chunk in f.chunks():
+			destination.write(chunk)

@@ -1,0 +1,117 @@
+{% extends 'base_generic.html' %}
+{% load static %}
+{% block style %}
+{% endblock %}
+{% block body %}
+    <div class="container-fluid">
+        <section class="dashboard-section">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="dashboard-left">
+                        <div class="profile-logo pt-4 text-center">
+                            <a hef="home.html">
+                                <div class="profile-img-wrap">
+                                    <img alt="" class="rounded-circle" src="{{ profile_image.url }}">
+                                    <span id="upload-container">
+                                        <form method="post" enctype="multipart/form-data" action="/profile/updateprofileimage/"  id="changeDp">
+                                            {% csrf_token %}
+                                {% for field in form %}
+                                    <p>
+                                        {{ field }}
+                                    </p>
+                                {% endfor %}
+                                        </form> 
+                                        <i class="icofont-camera-alt"></i>   
+                                        <!-- <input type="file" name="profile_image" id="profile_image" /><i class="icofont-camera-alt"></i> -->
+                                    </span>
+                                    <div class="profile-image-loader">
+                                        <div class="spinner-border" role="status">
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <h3>Ramen Das</h3>
+                            
+                            <ul>
+                                <li><h6>Followers :</h6> <span>3</span></li>
+                                <li><h6>Upcoming events : </h6><span>3</span></li>
+                            </ul>
+                            
+                        </div>
+                        <div class="dashboard-nav navbar-dark bg-black mb-5">
+                            <ul class="navbar-nav">
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="#"><i class="icofont-plus"></i> Create Event</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#"><i class="icofont-diamond"></i> Promotions</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#"><i class="icofont-calendar"></i> My Events</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#"><i class="icofont-ticket"></i> Manage Tickits</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="dashboard-nav navbar-dark bg-black  mb-5">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#"><i class="icofont-eye"></i> Upcomming event</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#"><i class="icofont-dice"></i> Past Event</a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div class="dashboard-nav navbar-dark bg-black  mb-5">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'dashboard' 'update' %}"><i class="icofont-gear"></i> Edit Profile</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#"><i class="icofont-bin"></i> Delete Profile</a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div class="dashboard-nav navbar-dark bg-black dashboard-social py-4  mb-5">
+                            <h5 class="text-white">Spred the world</h5>
+                            <ul class="">
+                                <li class="share-facebook">
+                                    <a class="" href="#"><i class="icofont-facebook"></i></a>
+                                </li>
+                                <li class="share-twitter">
+                                    <a class="" href="#"><i class="icofont-twitter"></i></a>
+                                </li>
+                                <li class="share-linkdin">
+                                    <a class="" href="#"><i class="icofont-linkedin"></i></a>
+                                </li>
+                                <li class="share-google-plus">
+                                    <a class="" href="#"><i class="icofont-google-plus"></i></a>
+                                </li>
+                                <li class="share-pinterest">
+                                    <a class="" href="#"><i class="icofont-pinterest"></i></a>
+                                </li>
+                            </ul>
+                            <input class="form-control" type="text" value="http://allevents.by/17534499" disabled="disabled">
+                            <p>Copy-n-paste this url into your web page, email or social app to share with your friends & colleagues.</p>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                <div class="col-sm-9">
+                    <div class="dashboard-content p-5">
+                        {% block dashboard_right %}
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </div>
+{% endblock %}
+{% block js %}
+{% endblock %}

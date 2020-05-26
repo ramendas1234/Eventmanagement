@@ -258,6 +258,7 @@ class EventDetailView(generic.DetailView):
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
 		context['is_details'] = True
+		context['similar_events'] = Event.objects.exclude(pk=self.object.pk)[:3]
 		return context
 
 

@@ -4,17 +4,17 @@
 {% endblock %}
 {% block body %}
 	<div class="image-banner">
-		<img src="{% static 'images/parties.jpg' %}">
+		<img src="{{ event.banner_image.url }}">
 	</div>
 	<div class="container">
 		<section class="event-head common-details my-4 " >
 			<div class="row">
 				<div class="col-md-2">
-					<img src="{% static 'images/yoga.jpg' %}" class="mr-3" alt="..." style="width: 100%;">
+					<img src="{{event.thumb_image.url}}" class="mr-3" alt="..." style="width: 100%;">
 				</div>
 				<div class="col-md-8">
-					<h2 class="font-weight-bold">Shaam Ki Chaai - Meet Someone New Over a Cup Of Chaai!</h2>
-					<span class="display-start-time">Sun May 24, 2020</span>
+					<h2 class="font-weight-bold">{{ event.title }}</h2>
+					<span class="display-start-time">{{ event.event_start_date|date:"D M d, Y " }}</span>
 				</div>
 				<div class="col-md-2">
 					<div class="buy-tickits px-2"><a class="btn btn-danger wrn-btn text-white"><i class="icofont-ticket"></i> Buy Tickits</a></div>
@@ -23,19 +23,22 @@
 		</section>
 		<div class="row">
 			<div class="col-sm-9">
+				
 				<div class="event-details-left-container common-details p-5">
+
+					{% if event.images.all %}
 					<div id="MiddleCarousel" class="carousel slide UACarousel" data-ride="carousel">
 						<ol class="carousel-indicators">
-							<li data-target="#MiddleCarousel" data-slide-to="0" class="active"></li>
-							<li data-target="#MiddleCarousel" data-slide-to="1"></li>
+							{% for item in  event.images.all %}
+							<li data-target="#MiddleCarousel" data-slide-to="{{ forloop.counter|add:'-1' }}" class="{% if forloop.counter is 1 %} active {% endif %}"></li>
+							{% endfor %}
 						</ol>
 						<div class="carousel-inner">
-							<div class="carousel-item active">
-								<img class="d-block w-100" src="{% static 'images/yoga.jpg' %}" alt="First slide">
+							{% for item in event.images.all %}
+							<div class="carousel-item {% if forloop.counter is 1 %} active {% endif %}">
+								<img class="d-block w-100" src="{{ item.file.url }}" >
 							</div>
-							<div class="carousel-item">
-								<img class="d-block w-100" src="{% static 'images/yoga.jpg' %}" alt="Second slide">
-							</div>
+							{% endfor %}
 						</div>
 						<a class="carousel-control-prev" href="#MiddleCarousel" role="button" data-slide="prev">
 							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -46,19 +49,34 @@
 							<span class="sr-only">Next</span>
 						</a>
 					</div>
+					{% endif %}
+
 					<div class="content my-4">
 						<p>
-							Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+							{{ event.description }}
 						</p>
 						<h5>Categories</h5>
+						{% if event.category.all %}
 						<ul class="mt-5">
-							<li class="mr-3"><a href="#" class="btn-round">Parties</a></li>
-							<li class="mr-3"><a href="#" class="btn-round">Entertainment</a></li>
-							<li class="mr-3"><a href="#" class="btn-round">Gaming</a></li>
+							{% for item in event.category.all %}
+							<li class="mr-3"><a href="#" class="btn-round">{{ item.name }}</a></li>
+							{% endfor %}
 						</ul>
+						{% endif %}
 						
-						
-						
+					</div>
+					{% if event.video_url %}
+					<div class="mt-4">
+						<div class="embed-responsive embed-responsive-16by9">
+							<iframe class="embed-responsive-item" src="{{ event.video_url }}"></iframe>
+						</div>
+					</div>
+					{% endif %}
+				</div>
+				<div class="similar-events common-details p-3 my-4">
+					<h4 class="text-center text-uppercase"> Events You May Like :</h4>
+					<div class="row">
+						{% include "hello_world.html" with events=similar_events %}  
 					</div>
 				</div>
 			</div>
@@ -68,12 +86,16 @@
 					<p>
 						<i class="icofont-clock-time"></i>
 						Sat Jul 11 2020 at 5:00 pm to 7:00 pm
+						{{ event.event_start_date|date:"D M d, Y g A" }} at {{ event.event_start_date|date:"g A" }}
+						to {{ event.event_end_date|date:"g A" }} 
 					</p>
 				</section>
 				<section class="event-map common-details p-2 mb-4">
-					<h6 class="wdiv-label"><i class="icofont-location-pin"></i> Red Xpress, Kolkata, India</h6>
-					<div class="event-map">
+					<h6 class="wdiv-label"><i class="icofont-location-pin"></i> {% if event.event_venue == 'online' %} Online {% else %} {{ event.event_location }} <br> {{ event.address }}, {{ event.city }} {% endif %} </h6>
+					{% if event.event_venue != "online" %}
+					<div id="event-map" style="height: 250px;">
 					</div>
+					{% endif %}
 				</section>
 				<section class="event-organizer common-details p-2 mb-4">
 					<h6 class="wdiv-label"><i class="icofont-ui-home"></i> Organizer</h6>
@@ -92,31 +114,59 @@
 						</div>
 					</div>
 				</section>
-
+				<section class="event-map common-details p-2 mb-4">
+					<h6 class="wdiv-label"><i class="icofont-luggage"></i>  Event TYpe : </h6>
+					<p>{{ event.event_type }}</p>
+				</section>
+				<section class="event-map common-details p-2 mb-4">
+					<h6 class="wdiv-label"><i class="icofont-web"></i>  Website : </h6>
+					<p>{{ event.website_link }}</p>
+				</section>
 				<section class="event-share common-details p-2 mb-4">
 					<h6 class="wdiv-label"><i class="icofont-share"></i> Share This Event:</h6>
 					<ul >
-                                <li class="share-facebook">
-                                    <a class="" href="#"><i class="icofont-facebook"></i></a>
-                                </li>
-                                <li class="share-twitter">
-                                    <a class="" href="#"><i class="icofont-twitter"></i></a>
-                                </li>
-                                <li class="share-linkdin">
-                                    <a class="" href="#"><i class="icofont-linkedin"></i></a>
-                                </li>
-                                <li class="share-google-plus">
-                                    <a class="" href="#"><i class="icofont-google-plus"></i></a>
-                                </li>
-                                <li class="share-pinterest">
-                                    <a class="" href="#"><i class="icofont-pinterest"></i></a>
-                                </li>
-                            </ul>
+						<li class="share-facebook">
+							<a class="" href="#"><i class="icofont-facebook"></i></a>
+						</li>
+						<li class="share-twitter">
+							<a class="" href="#"><i class="icofont-twitter"></i></a>
+						</li>
+						<li class="share-linkdin">
+							<a class="" href="#"><i class="icofont-linkedin"></i></a>
+						</li>
+						<li class="share-google-plus">
+							<a class="" href="#"><i class="icofont-google-plus"></i></a>
+						</li>
+						<li class="share-pinterest">
+							<a class="" href="#"><i class="icofont-pinterest"></i></a>
+						</li>
+					</ul>
 				</section>
-
 			</div>
 		</div>
 	</div>
 {% endblock %}
 {% block js %}
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChxeOfZU39KSjQ2vyFnqQOSe0oATVuWP0&libraries=places"></script>
+<script>
+	  function initialize() {
+          var myLatlng = new google.maps.LatLng({{ event.latitude }},{{ event.longitude }} );
+          var mapOptions = {
+            zoom: 6,
+            center: myLatlng
+          }
+          var map = new google.maps.Map(document.getElementById('event-map'), mapOptions);
+
+          var marker = new google.maps.Marker({
+              position: myLatlng,
+              map: map,
+              title: 'Hello World!'
+          });
+        }
+         google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+
+
+
 {% endblock %}

@@ -76,6 +76,8 @@ class Event(models.Model):
 			return "₹{1}".format(data[0].payment_currency,data[0].tickit_price)
 		else:
 			return 'Free'
+	# def get_event_gallery(self):
+	# 	return self.images.all()		
 		
 	def __str__(self):
 		return self.title

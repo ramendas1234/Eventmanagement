@@ -69,7 +69,7 @@ class Event(models.Model):
 	listing_type = models.CharField(max_length=10,choices=LISTING_TYPE, default='public')
 	featured = models.BooleanField('make it features ? ',default=True)
 	def is_online(self):
-		return True if self.event_venue is 'online' else False
+		return True if self.event_venue=='online' else False
 	def get_basic_price(self):
 		data = self.tickit_set.all()
 		if(len(data)>0):
@@ -129,6 +129,19 @@ class Profile(models.Model):
 	def __str__(self):
 		return self.user.username
 
+class Attendee(models.Model):
+	# attendee_id = models.CharField(max_length=100, primary_key=True)
+	attedee_name = models.CharField(max_length=300,default="")
+	attendee_email = models.CharField(max_length=100,default="")
+	attendee_mobile = models.CharField(max_length=30,default="")
+	event = models.ForeignKey(Event,on_delete=models.CASCADE, default="")
+	tickit = models.ForeignKey(Tickit,on_delete=models.CASCADE)
+	user = models.ForeignKey(User,on_delete=models.CASCADE)
+	status = models.BooleanField(default=False) 
+	def __str__(self):
+		return self.attedee_name
+
+
 @receiver(post_save, sender=User)
 def update_profile_signal(sender, instance, created, **kwargs):
 	print('admin login')
@@ -163,3 +176,18 @@ def handle_uploaded_file(f):
 	with open('name.txt', 'wb+') as destination:
 		for chunk in f.chunks():
 			destination.write(chunk)
+
+def get_total_price(data):
+	total_price = 0
+	if(len(data)>0):
+		for item in data:
+			total_price = total_price +  int(int(Tickit.objects.get(pk=item['tickit_id']).tickit_price) )
+	return total_price
+
+
+from django.contrib.sites.shortcuts import get_current_site
+def home_url():
+	request = None
+	full_url = ''.join(['http://', get_current_site(request).domain])
+	return 	full_url	
+

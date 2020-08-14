@@ -1,0 +1,18 @@
+{% load static %}
+{% if categories %}
+<div class="row">
+            {% for catg in categories %}
+                <div class="col-md-4 col-sm-6">
+                            <div class="box1 mb-3">
+                                <img src="{{ catg.image.url }}" alt="">
+                                <h3 class="title">{{ catg.name }}</h3>
+                                <ul class="icon">
+                                    <li><a href="{% url 'events-category' catg.pk %}">View <i class="icofont-long-arrow-right"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+            {% endfor %}
+</div>            
+            {% else %}
+                <div class="alert alert-danger">Sorry No Categories found</div>
+            {% endif %} 

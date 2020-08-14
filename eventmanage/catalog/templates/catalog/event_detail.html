@@ -17,7 +17,7 @@
 					<span class="display-start-time">{{ event.event_start_date|date:"D M d, Y " }}</span>
 				</div>
 				<div class="col-md-2">
-					<div class="buy-tickits px-2"><a class="btn btn-danger wrn-btn text-white"><i class="icofont-ticket"></i> Buy Tickits</a></div>
+					<div class="buy-tickits px-2"><a class="btn btn-danger wrn-btn text-white" data-toggle="modal" data-target="#tickitCart"><i class="icofont-ticket"></i> Buy Tickits</a></div>
 				</div>
 			</div>
 		</section>
@@ -25,19 +25,18 @@
 			<div class="col-sm-9">
 				
 				<div class="event-details-left-container common-details p-5">
-
 					{% if event.images.all %}
-					<div id="MiddleCarousel" class="carousel slide UACarousel" data-ride="carousel">
-						<ol class="carousel-indicators">
-							{% for item in  event.images.all %}
-							<li data-target="#MiddleCarousel" data-slide-to="{{ forloop.counter|add:'-1' }}" class="{% if forloop.counter is 1 %} active {% endif %}"></li>
-							{% endfor %}
-						</ol>
-						<div class="carousel-inner">
-							{% for item in event.images.all %}
-							<div class="carousel-item {% if forloop.counter is 1 %} active {% endif %}">
-								<img class="d-block w-100" src="{{ item.file.url }}" >
-							</div>
+						<div id="MiddleCarousel" class="carousel slide UACarousel" data-ride="carousel">
+							<ol class="carousel-indicators">
+								{% for item in  event.images.all %}
+									<li data-target="#MiddleCarousel" data-slide-to="{{ forloop.counter|add:'-1' }}" class="{% if forloop.counter is 1 %} active {% endif %}"></li>
+								{% endfor %}
+							</ol>
+							<div class="carousel-inner">
+								{% for item in event.images.all %}
+									<div class="carousel-item {% if forloop.counter is 1 %} active {% endif %}">
+									<img class="d-block w-100" src="{{ item.file.url }}" >
+								</div>
 							{% endfor %}
 						</div>
 						<a class="carousel-control-prev" href="#MiddleCarousel" role="button" data-slide="prev">
@@ -49,124 +48,282 @@
 							<span class="sr-only">Next</span>
 						</a>
 					</div>
-					{% endif %}
-
-					<div class="content my-4">
-						<p>
-							{{ event.description }}
-						</p>
-						<h5>Categories</h5>
-						{% if event.category.all %}
+				{% endif %}
+				<div class="content my-4">
+					<p>
+						{{ event.description }}
+					</p>
+					<h5>Categories</h5>
+					{% if event.category.all %}
 						<ul class="mt-5">
 							{% for item in event.category.all %}
-							<li class="mr-3"><a href="#" class="btn-round">{{ item.name }}</a></li>
+								<li class="mr-3"><a href="#" class="btn-round">{{ item.name }}</a></li>
 							{% endfor %}
 						</ul>
-						{% endif %}
-						
-					</div>
-					{% if event.video_url %}
+					{% endif %}
+					
+				</div>
+				{% if event.video_url %}
 					<div class="mt-4">
 						<div class="embed-responsive embed-responsive-16by9">
 							<iframe class="embed-responsive-item" src="{{ event.video_url }}"></iframe>
 						</div>
 					</div>
-					{% endif %}
-				</div>
-				<div class="similar-events common-details p-3 my-4">
-					<h4 class="text-center text-uppercase"> Events You May Like :</h4>
-					<div class="row">
-						{% include "hello_world.html" with events=similar_events %}  
-					</div>
-				</div>
+				{% endif %}
 			</div>
-			<div class="col-sm-3">
-				<section class="event-date-time common-details p-2 mb-4">
-					<h4 class="wdiv-label">Date &amp; Time</h4>
-					<p>
-						<i class="icofont-clock-time"></i>
-						Sat Jul 11 2020 at 5:00 pm to 7:00 pm
-						{{ event.event_start_date|date:"D M d, Y g A" }} at {{ event.event_start_date|date:"g A" }}
-						to {{ event.event_end_date|date:"g A" }} 
-					</p>
-				</section>
-				<section class="event-map common-details p-2 mb-4">
-					<h6 class="wdiv-label"><i class="icofont-location-pin"></i> {% if event.event_venue == 'online' %} Online {% else %} {{ event.event_location }} <br> {{ event.address }}, {{ event.city }} {% endif %} </h6>
-					{% if event.event_venue != "online" %}
-					<div id="event-map" style="height: 250px;">
-					</div>
-					{% endif %}
-				</section>
-				<section class="event-organizer common-details p-2 mb-4">
-					<h6 class="wdiv-label"><i class="icofont-ui-home"></i> Organizer</h6>
-					<div class="media">
-						<img src="{% static 'images/yoga.jpg' %}" class="mr-3" alt="...">
-						<div class="media-body">
-							<h5 class="mt-0"><a href="#">Lifeoffline</a></h5>
-							<ul>
-								<li>
-									<a href="#" class="menu-login-btn mr-2"><i class="icofont-plus"></i> Follow</a>
-								</li>
-								<li>
-									<a href="#" class="menu-login-btn"><i class="icofont-envelope"></i> Contact</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</section>
-				<section class="event-map common-details p-2 mb-4">
-					<h6 class="wdiv-label"><i class="icofont-luggage"></i>  Event TYpe : </h6>
-					<p>{{ event.event_type }}</p>
-				</section>
-				<section class="event-map common-details p-2 mb-4">
-					<h6 class="wdiv-label"><i class="icofont-web"></i>  Website : </h6>
-					<p>{{ event.website_link }}</p>
-				</section>
-				<section class="event-share common-details p-2 mb-4">
-					<h6 class="wdiv-label"><i class="icofont-share"></i> Share This Event:</h6>
-					<ul >
-						<li class="share-facebook">
-							<a class="" href="#"><i class="icofont-facebook"></i></a>
-						</li>
-						<li class="share-twitter">
-							<a class="" href="#"><i class="icofont-twitter"></i></a>
-						</li>
-						<li class="share-linkdin">
-							<a class="" href="#"><i class="icofont-linkedin"></i></a>
-						</li>
-						<li class="share-google-plus">
-							<a class="" href="#"><i class="icofont-google-plus"></i></a>
-						</li>
-						<li class="share-pinterest">
-							<a class="" href="#"><i class="icofont-pinterest"></i></a>
-						</li>
-					</ul>
-				</section>
+			<div class="similar-events common-details p-3 my-4">
+				<h4 class="text-center text-uppercase"> Events You May Like :</h4>
+				<div class="row">
+					{% include "hello_world.html" with events=similar_events %}
+				</div>
 			</div>
 		</div>
+		<div class="col-sm-3">
+			<section class="event-date-time common-details p-2 mb-4">
+				<h4 class="wdiv-label">Date &amp; Time</h4>
+				<p>
+					<i class="icofont-clock-time"></i>
+					Sat Jul 11 2020 at 5:00 pm to 7:00 pm
+					{{ event.event_start_date|date:"D M d, Y g A" }} at {{ event.event_start_date|date:"g A" }}
+					to {{ event.event_end_date|date:"g A" }}
+				</p>
+			</section>
+			<section class="event-map common-details p-2 mb-4">
+				<h6 class="wdiv-label"><i class="icofont-location-pin"></i> {% if event.event_venue == 'online' %} Online {% else %} {{ event.event_location }} <br> {{ event.address }}, {{ event.city }} {% endif %} </h6>
+				{% if event.event_venue != "online" %}
+					<div id="event-map" style="height: 250px;">
+					</div>
+				{% endif %}
+			</section>
+			<section class="event-organizer common-details p-2 mb-4">
+				<h6 class="wdiv-label"><i class="icofont-ui-home"></i> Organizer</h6>
+				<div class="media">
+					<img src="{% static 'images/yoga.jpg' %}" class="mr-3" alt="...">
+					<div class="media-body">
+						<h5 class="mt-0"><a href="#">Lifeoffline</a></h5>
+						<ul>
+							<li>
+								<a href="#" class="menu-login-btn mr-2"><i class="icofont-plus"></i> Follow</a>
+							</li>
+							<li>
+								<a href="#" class="menu-login-btn"><i class="icofont-envelope"></i> Contact</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+			<section class="event-map common-details p-2 mb-4">
+				<h6 class="wdiv-label"><i class="icofont-luggage"></i>  Event TYpe : </h6>
+				<p>{{ event.event_type }}</p>
+			</section>
+			<section class="event-map common-details p-2 mb-4">
+				<h6 class="wdiv-label"><i class="icofont-web"></i>  Website : </h6>
+				<p>{{ event.website_link }}</p>
+			</section>
+			<section class="event-share common-details p-2 mb-4">
+				<h6 class="wdiv-label"><i class="icofont-share"></i> Share This Event:</h6>
+				<ul >
+					<li class="share-facebook">
+						<a class="" href="#"><i class="icofont-facebook"></i></a>
+					</li>
+					<li class="share-twitter">
+						<a class="" href="#"><i class="icofont-twitter"></i></a>
+					</li>
+					<li class="share-linkdin">
+						<a class="" href="#"><i class="icofont-linkedin"></i></a>
+					</li>
+					<li class="share-google-plus">
+						<a class="" href="#"><i class="icofont-google-plus"></i></a>
+					</li>
+					<li class="share-pinterest">
+						<a class="" href="#"><i class="icofont-pinterest"></i></a>
+					</li>
+				</ul>
+			</section>
+		</div>
 	</div>
+
+ </div>   <!--END CONTAINER -->
+<div class="modal fade" id="tickitCart" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="tickitCartLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			
+			<div class="modal-body text-center">
+
+				<!-- START MODAL FIRST STEP -->
+				<div class="modal-first-step">
+					<div>
+						<h5 class="modal-title" style="display:inline-block;" id="tickitCartLabel">Book Tickits</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="login-modal-content-inner">
+						<div class="tickit-cart-container">
+							<h4>Select Tickits</h4>
+							<table>
+								<thead>
+									<tr class='common-details'>
+										<th>Tickits Type</th>
+										<th>Price</th>
+										<th>Qty</th>
+										<th>action</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for item in event.tickit_set.all %}
+									<tr class="spacer"></tr>
+									<tr class="common-details " data-tickitId = {{ item.id }}-{{ item.tickit_price }}>
+										<td>{{ item.tickit_name }}</td>
+										<td>₹ {{ item.tickit_price }}</td>
+										<td><span class="tickt-qty">0</span></td>
+										<td><a href="#" class="tickt-plus"><i class="icofont-plus-circle"></i></a> &nbsp;&nbsp; <a href="#" class="tickt-minus"><i class="icofont-minus-circle"></i></a></td>
+									</tr>
+								{% endfor %}
+							<tr class="spacer"></tr>
+							<tr id="tickit-total">
+								<td>Total : </td>
+								<td>$<span class="total-price">0</span></td>
+								<td><span class="total-tickt-qty">0</span></td>
+								<td><a class="btn btn-danger text-white" id="add-cart-process">Proceed</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				
+			</div>
+		</div>
+		<!-- END MODAL FIRST STEP -->
+
+		<!-- START MODAL SECOND STEP -->
+		<div class="modal-second-step">
+					<div class="attendee-info-container">
+						<h5 class="modal-title" style="display:inline-block;" id="tickitCartLabel">Attendee Information</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+						<form id="attendee-form" method="post">
+						<!-- {% csrf_token %} -->
+						<div id="attendee-form-div">
+							
+						</div>
+						</form>
+						
+
+						<a class="btn btn-primary text-white back-step-one" href="#"> Back</a>
+						<a class="btn btn-danger text-white" href="#" id="attendee-process"> Procced</a>
+					</div>
+		</div>
+		<!-- END MODAL SECOND Step -->
+		
+	</div>
+	
+</div>
+</div>
+</div>
+</div>
 {% endblock %}
 {% block js %}
-
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChxeOfZU39KSjQ2vyFnqQOSe0oATVuWP0&libraries=places"></script>
 <script>
-	  function initialize() {
-          var myLatlng = new google.maps.LatLng({{ event.latitude }},{{ event.longitude }} );
-          var mapOptions = {
-            zoom: 6,
-            center: myLatlng
-          }
-          var map = new google.maps.Map(document.getElementById('event-map'), mapOptions);
+	function initialize() {
+var myLatlng = new google.maps.LatLng({{ event.latitude }},{{ event.longitude }} );
+var mapOptions = {
+zoom: 6,
+center: myLatlng
+}
+var map = new google.maps.Map(document.getElementById('event-map'), mapOptions);
+var marker = new google.maps.Marker({
+position: myLatlng,
+map: map,
+title: 'Hello World!'
+});
+}
+google.maps.event.addDomListener(window, 'load', initialize);
+jQuery(document).ready(function($){
+	var totalCartItem = {} ;
+	var totalQty;
+	//console.log(localStorage.getItem('cart'))
+	$(document).on('click','.tickt-plus',function(){
+		var el = $(this).parent().closest('tr') ;
+		var qty = parseInt(el.find('.tickt-qty').text()) + 1
+		el.find('.tickt-qty').text(qty)
+		var value = el.attr('data-tickitid').split('-')
+		/*  calculate total price */
+		var totalPrice = parseInt($('.total-price').text());
+		totalPrice = totalPrice + parseInt(value[1])
+		$('.total-price').text(totalPrice)
+		/* calculate total quantity */
+		totalQty = parseInt($('.total-tickt-qty').text()) + 1 ;
+		$('.total-tickt-qty').text(totalQty)
+		tickitId = value[0].toString();
+		totalCartItem[tickitId] = qty;
+		//console.log(totalCartItem);
+		// localStorage.setItem("mytime", Date.now());
+	});
+	$(document).on('click','.tickt-minus',function(){
+		var el = $(this).parent().closest('tr') ;
+		var existQty = parseInt(el.find('.tickt-qty').text());
+		if(existQty<1) return false ;
+		var qty = parseInt(el.find('.tickt-qty').text()) -1 ;
+		el.find('.tickt-qty').text(qty)
+		var value = el.attr('data-tickitid').split('-')
+		/*  calculate total price */
+		var totalPrice = parseInt($('.total-price').text());
+		if(totalPrice <1 ) return false;
+		totalPrice = totalPrice - parseInt(value[1])
+		$('.total-price').text(totalPrice)
+		/* calculate total quantity */
+		if(totalQty<1) return false;
+		 totalQty = parseInt($('.total-tickt-qty').text()) - 1 ;
+		$('.total-tickt-qty').text(totalQty)
+		/* remove tickit from array */
+		tickitId = value[0].toString();
+		if(qty<1){
+			delete totalCartItem[tickitId]
+		}else{
+			totalCartItem[tickitId] = qty;
+		}
+		//console.log(totalCartItem)
+	});
+	$(document).on('click',"#add-cart-process",function(){
 
-          var marker = new google.maps.Marker({
-              position: myLatlng,
-              map: map,
-              title: 'Hello World!'
-          });
-        }
-         google.maps.event.addDomListener(window, 'load', initialize);
+		console.log(totalCartItem)
+		/* generTE ttendee form */
+		/*if(totalQty!='undefined'){
+			var attendeeHtml = '<div class="col-sm-12 common-details m-2 p-2"><div class="form-group"><input type="text" class="form-control" name="attendee_name" placeholder="enter name"></div><div class="form-group"><input type="text" name="attendee_email" class="form-control" placeholder="enter email"></div><div class="form-group"><input type="text" name="attendee_mobile" class="form-control" placeholder="enter mobile"></div></div>'
+			$('#attendee-form-div').html('');
+			for(i=0; i<totalQty; i++){
+				$('#attendee-form-div').append(attendeeHtml);
+			}
+		} */
+
+		if(totalCartItem!='undefined'){
+			
+			$('#attendee-form-div').html('');
+			for(var key in totalCartItem){
+				var attendeeHtml = '<div class="col-sm-12 common-details m-2 p-2"><div class="form-group"><input type="text" class="form-control" name="attendee_name" placeholder="enter name"><input type="hidden" name="tickit_id" value="'+key+'"></div><div class="form-group"><input type="text" name="attendee_email" class="form-control" placeholder="enter email"></div><div class="form-group"><input type="text" name="attendee_mobile" class="form-control" placeholder="enter mobile"></div></div>'
+				for(i=0; i<parseInt(totalCartItem[key]); i++){
+					$('#attendee-form-div').append(attendeeHtml);
+				}
+			}
+		}
+
+
+		localStorage.removeItem('cart');
+		localStorage.setItem('cart',JSON.stringify(totalCartItem));
+		$('.modal-first-step').hide();
+		$('.modal-second-step').show();
+
+	});
+	$(document).on('click','.back-step-one',function(){
+		$('.modal-second-step').hide();
+		$('.modal-first-step').show();
+	});
+	$(document).on('click','#attendee-process',function(e){
+
+		$('#attendee-form').submit();
+	});
+})
 </script>
-
-
-
 {% endblock %}

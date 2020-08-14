@@ -103,6 +103,76 @@ alert('success');
 });  */
 
 
+$(document).on('submit','#attendee-form',function(e){
+	e.preventDefault();
+	// alert('cascasc');
+	var form_data = $(this).serializeArray();
+	formData = attendeeForm(form_data);
+	console.log(form_data);
+	
+	$.ajax({
+		url: '/attendee_process/',
+type: 'POST',
+data: formData,
+success: function(data) {
+	
+	data = JSON.parse(data);
+	console.log(data)
+	if(!data.flag){
+		swal("Oops", data.msg, "error")
+	}else{
+		window.location.href = '/checkout/'
+	}
+
+}
+	});
+});
+
+	function attendeeForm(formArray) {
+    var returnArray = {'attendee_name':[],'tickit_id':[],'attendee_email':[], 'attendee_mobile':[]};
+    for (var i=0;i<formArray.length;i++) {
+        
+        	if(formArray[i].name == 'attendee_name'){
+        		returnArray['attendee_name'].push(formArray[i].value) 
+        	}else if(formArray[i].name == 'tickit_id'){
+        		returnArray['tickit_id'].push(formArray[i].value) 
+        	}else if(formArray[i].name == 'attendee_email'){
+        		returnArray['attendee_email'].push(formArray[i].value) 
+        	}else if(formArray[i].name == 'attendee_mobile'){
+        		returnArray['attendee_mobile'].push(formArray[i].value) 
+        	}else{
+        		returnArray[formArray[i].name] = formArray[i].value;
+        	}
+           
+    }
+    
+    console.log(returnArray); 
+    return returnArray;
+}
+
+
+$(document).on('submit','#test-form',function(e){
+	e.preventDefault();
+	alert('cascasc');
+	data = {
+		'csrfmiddlewaretoken' : $('input[name=csrfmiddlewaretoken]').val(),
+		'name' : $("#name").val()
+	}
+
+	$.ajax({
+		url: '/attendee_process/',
+		type: 'POST',
+		data: data,
+		processData: false,
+		contentType: false,
+		success: function(data) {
+		alert('success');
+		}
+	});
+
+
+});
+
 
 
 })

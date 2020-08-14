@@ -1,0 +1,65 @@
+{% extends 'base_generic.html' %}
+{% load static %}
+{% load get_obj from poll_extras %}
+{% block body %}
+
+<h3 class="text-center text-uppercase my-4">Checkout</h3>
+
+<div class="container">
+<div class="tickit-container">
+  <ul>
+
+    {% for item in data %}
+    
+    <li>
+      <div class="tickit-name">{% get_obj "Tickit" item.tickit_id "tickit_name" %}</div>
+      <a href="javascript:void(0)">
+        <h5><i class="icofont-money-bag"></i> ₹{% get_obj "Tickit" item.tickit_id "tickit_price" %}</h5>
+        <h5><i class="icofont-business-man-alt-1"></i> {{item.attendee_name}}</h5>
+        <p><i class="icofont-email"></i> {{ item.attendee_email }}</p>
+      </a>
+    </li>
+    {% endfor %}
+
+  </ul>
+</div>
+
+<div class="cart-container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Tickit</th>
+        <th>Quantity</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in cart_data %}
+      <tr>
+        <td>{{ item.tickit.tickit_name }}</td>
+        <td>{{ item.qty }}</td>
+        <td>₹{% widthratio item.tickit.tickit_price 1 item.qty %}</td>
+      </tr>
+      {% endfor %}
+      <tr>
+        <td>Total</td>
+        <td>{{ total_qty }}</td>
+        <td>₹{{ total_price }}</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td><a href="/payment-redirect/" class="btn btn-danger text-white">Pay</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</div>
+
+{% endblock %}
+
+{% block js %}
+
+
+{% endblock %}

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Event, City, Category, Image, Tickit
+from .models import Event, City, Category, Image, Tickit, Attendee
 from django.conf import settings
 
 @admin.register(City)
@@ -64,5 +64,9 @@ class EventAdmin(admin.ModelAdmin):
 		'all': ('css/admin/location_picker.css',)
 		}
 		js = ('https://maps.googleapis.com/maps/api/js?key={}&libraries=places'.format(settings.GOOGLE_MAPS_API_KEY),'js/admin/custom_backend.js', )
+
+@admin.register(Attendee)
+class AttendeeAdmin(admin.ModelAdmin):
+	pass
 
 		

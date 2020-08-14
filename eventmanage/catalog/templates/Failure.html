@@ -1,0 +1,42 @@
+{% extends 'base_generic.html' %}
+{% load static %}
+{% block style %}
+{% endblock %}
+{% block body %}<!--
+	<div class="container">
+		<div class="row text-center">
+				
+			
+			<div class="col-sm-12">
+				<br><br> <h2 style="color:#f34200">Payment Failure</h2>
+				<img src="{% static '/images/not-done.png' %}" style="width: 200px;">
+				<p style="font-size:20px;color:#5C5C5C;">Your payment was not successful. There have some problem. If there have any deduction from your bank account it will be refund within 24 hrs. Thank you for choosing MyawesomeCart.</p>
+				<br><br>
+			</div>
+			
+				
+		</div> -->
+		<!-- Modal -->
+		<div class="modal fade2" style="background-color: rgba(0,0,0,0.9);" id="paymentFailure" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					
+					<div class="modal-body text-center">
+						<br><br> <h2 style="color:#f34200">Payment Failure</h2>
+				<img src="{% static '/images/not-done.png' %}" style="width: 200px;">
+				<p style="font-size:20px;color:#5C5C5C;">Your payment was not successful. There have some problem. If there have any deduction from your bank account it will be refund within 24 hrs. Thank you for choosing MyawesomeCart.</p>
+				<br><br>
+					<a class="btn btn-primary text-white" href="/checkout/">Back to checkout <i class="icofont-long-arrow-right"></i></a>	
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	{% endblock %}
+	{% block js %}
+	<script>
+		jQuery(document).ready(function($){
+			$('#paymentFailure').modal('show');
+		});
+	</script>
+	{% endblock %}
